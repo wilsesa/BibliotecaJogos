@@ -5,11 +5,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Catálogo de jogos</h2>
-    <hr />
 
+    <a href="CadastroEdicaoJogos.aspx">Cadastrar Novo Jogo</a>
+
+    <hr />
     <asp:Repeater ID="RepeaterJogos" runat="server">
         <ItemTemplate>
-            <div class="jogo" onclick="redirecionarParaPaginaDoJogo('<%= Session["Perfil"].ToString() %>',<%# DataBinder.Eval(Container.DataItem, "Id") %>)">
+            <%--<div class="jogo" onclick="redirecionarParaPaginaDoJogo('<%= Session["Perfil"].ToString() %>',<%# DataBinder.Eval(Container.DataItem, "Id") %>)">--%>
                 <div class="capa-jogo">
                     <img src="../Content/ImagensJogos/<%# DataBinder.Eval(Container.DataItem, "Imagem") %>" alt="<%# DataBinder.Eval(Container.DataItem, "Titulo") %>" />
                 </div>

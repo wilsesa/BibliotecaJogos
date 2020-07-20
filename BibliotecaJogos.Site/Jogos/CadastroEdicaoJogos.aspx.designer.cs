@@ -24,31 +24,22 @@ namespace BibliotecaJogos.Site.Jogos
         protected global::System.Web.UI.WebControls.TextBox txtTitulo;
 
         /// <summary>
-        /// Controle RfvTitulo.
+        /// Controle txtValorPago.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RfvTitulo;
+        protected global::System.Web.UI.WebControls.TextBox txtValorPago;
 
         /// <summary>
-        /// Controle ValorPago.
+        /// Controle txtDataCompra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ValorPago;
-
-        /// <summary>
-        /// Controle DataCompra.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DataCompra;
+        protected global::System.Web.UI.WebControls.TextBox txtDataCompra;
 
         /// <summary>
         /// Controle FileUploadImage.
@@ -76,6 +67,15 @@ namespace BibliotecaJogos.Site.Jogos
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlEditor;
+
+        /// <summary>
+        /// Controle lblMensagem.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensagem;
 
         /// <summary>
         /// Controle btnGravar.

@@ -1,4 +1,5 @@
-﻿using BibliotecaJogos.BLL.Autenticacao;
+﻿using BibliotecaJogos.BLL;
+using BibliotecaJogos.BLL.Autenticacao;
 using BibliotecaJogos.Entities;
 using System;
 using System.Collections.Generic;

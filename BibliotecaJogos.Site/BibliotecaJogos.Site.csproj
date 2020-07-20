@@ -76,6 +76,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ImagensJogos\Assassin%27s_Creed.jpg" />
+    <Content Include="Content\ImagensJogos\Batman_arkham_city.jpg" />
     <Content Include="Content\ImagensJogos\Call of Duty.jpg" />
     <Content Include="Content\ImagensJogos\Dark soulII.jpg" />
     <Content Include="Content\ImagensJogos\Farcry3.jpg" />
