@@ -1,12 +1,8 @@
 ﻿using BibliotecaJogos.BLL;
-using BibliotecaJogos.BLL.Autenticacao;
 using BibliotecaJogos.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace BibliotecaJogos.Site.Jogos
 {
@@ -71,13 +67,13 @@ namespace BibliotecaJogos.Site.Jogos
                     _jogosBo.InserirNovoJogo(jogo);
                     mensagemDeSucesso = "Jogo cadastrado com sucesso...";
                 }
-               
+
                 lblMensagem.ForeColor = System.Drawing.Color.Green;
                 lblMensagem.Text = mensagemDeSucesso;
 
                 btnGravar.Enabled = false;
             }
-            catch(Exception ex) 
+            catch (Exception)
             {
                 lblMensagem.ForeColor = System.Drawing.Color.Red;
                 lblMensagem.Text = "Ocurreu um erro ao gravar o jogo";
@@ -93,7 +89,7 @@ namespace BibliotecaJogos.Site.Jogos
             jogo.DataCompra = string.IsNullOrWhiteSpace(txtDataCompra.Text) ? (DateTime?)null : Convert.ToDateTime(txtDataCompra.Text);
             jogo.IdEditor = Convert.ToInt32(DdlEditor.SelectedValue);
             jogo.IdGenero = Convert.ToInt32(DdlGenero.SelectedValue);
-            
+
 
             return jogo;
 
@@ -120,8 +116,8 @@ namespace BibliotecaJogos.Site.Jogos
             {
                 return null;
             }
-        } 
-            
+        }
+
         private void CarregarEditoresNaCombo()
         {
             _editorBo = new EditorBo();
@@ -155,13 +151,13 @@ namespace BibliotecaJogos.Site.Jogos
             DdlGenero.SelectedValue = jogo.IdGenero.ToString();
         }
 
-        public int ObterIdDoJogo() 
+        public int ObterIdDoJogo()
         {
             var id = 0;
             var idQueryString = Request.QueryString["id"];
             if (int.TryParse(idQueryString, out id))
             {
-                if(id <= 0)
+                if (id <= 0)
                 {
                     throw new Exception("Id inválido");
                 }
