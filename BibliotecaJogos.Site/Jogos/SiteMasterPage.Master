@@ -19,6 +19,7 @@
                         <asp:MenuItem NavigateUrl="~/Jogos/Catalogo.aspx" Text="Catálogo" Value="Catálogo"></asp:MenuItem>
                         <asp:MenuItem Text="Cadastro" Value="CadastroJogos"></asp:MenuItem>
                     </asp:MenuItem>
+                    <asp:MenuItem Text="Sair" Value="Sair" NavigateUrl="~/Jogos/Catalogo.aspx?logout=logout"></asp:MenuItem>
                 </Items>
             </asp:Menu>
             <div style="margin:50px 0px 0px 30px;">

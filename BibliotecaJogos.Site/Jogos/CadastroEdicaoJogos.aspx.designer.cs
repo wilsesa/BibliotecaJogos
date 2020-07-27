@@ -11,7 +11,7 @@ namespace BibliotecaJogos.Site.Jogos
 {
 
 
-    public partial class CadastroEdicaoJogos
+    public partial class PreencherModelo
     {
 
         /// <summary>

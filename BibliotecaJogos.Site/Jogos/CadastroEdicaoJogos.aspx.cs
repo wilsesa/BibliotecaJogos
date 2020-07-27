@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace BibliotecaJogos.Site.Jogos
 {
-    public partial class CadastroEdicaoJogos : System.Web.UI.Page
+    public partial class PreencherModelo : System.Web.UI.Page
     {
         private GeneroBo _generoBo;
         private EditorBo _editorBo;
@@ -21,6 +21,11 @@ namespace BibliotecaJogos.Site.Jogos
             {
                 CarregarEditoresNaCombo();
                 CarregarGenerosNaCombo();
+
+                if (EstaEmModoEdicao())
+                {
+                    CarregarDadosParaEdicao();
+                }
             }
         }
 
@@ -28,11 +33,14 @@ namespace BibliotecaJogos.Site.Jogos
         {
             _jogosBo = new JogosBo();
 
-            var jogo = new Jogo();
-            
-            jogo.Titulo = txtTitulo.Text;
-            jogo.ValorPago = string.IsNullOrWhiteSpace(txtValorPago.Text) ? (double?) null : Convert.ToDouble(txtValorPago.Text);
-            jogo.DataCompra = string.IsNullOrWhiteSpace(txtDataCompra.Text) ? (DateTime?)null : Convert.ToDateTime(txtDataCompra.Text);
+            //var jogo = new Jogo();
+
+            var jogo = ObterModeloPrenchido();
+
+
+            //jogo.Titulo = txtTitulo.Text;
+            //jogo.ValorPago = string.IsNullOrWhiteSpace(txtValorPago.Text) ? (double?) null : Convert.ToDouble(txtValorPago.Text);
+            //jogo.DataCompra = string.IsNullOrWhiteSpace(txtDataCompra.Text) ? (DateTime?)null : Convert.ToDateTime(txtDataCompra.Text);
             //jogo.Imagem = DateTime.Now.ToString("yyyyMMddhhmmss") + FileUploadImage.FileName;
 
             try
@@ -44,21 +52,51 @@ namespace BibliotecaJogos.Site.Jogos
                 lblMensagem.Text = "Ocurreu um erro ao salvar a imagem";
             }
 
-            jogo.IdEditor = Convert.ToInt32(DdlEditor.SelectedValue);
-            jogo.IdGenero = Convert.ToInt32(DdlGenero.SelectedValue);
+            //jogo.IdEditor = Convert.ToInt32(DdlEditor.SelectedValue);
+            //jogo.IdGenero = Convert.ToInt32(DdlGenero.SelectedValue);
 
             try
             {
-                _jogosBo.InserirNovoJogo(jogo);
-                lblMensagem.Text = "Green";
-                lblMensagem.Text = "Jogo Cadastrado com sucesso!!!";
+                var mensagemDeSucesso = "";
+
+                if (EstaEmModoEdicao())
+                {
+                    jogo.Id = ObterIdDoJogo();
+
+                    _jogosBo.AlterarJogo(jogo);
+                    mensagemDeSucesso = "Jogo alterado com sucesso...";
+                }
+                else
+                {
+                    _jogosBo.InserirNovoJogo(jogo);
+                    mensagemDeSucesso = "Jogo cadastrado com sucesso...";
+                }
+               
+                lblMensagem.ForeColor = System.Drawing.Color.Green;
+                lblMensagem.Text = mensagemDeSucesso;
+
                 btnGravar.Enabled = false;
             }
-            catch 
+            catch(Exception ex) 
             {
+                lblMensagem.ForeColor = System.Drawing.Color.Red;
                 lblMensagem.Text = "Ocurreu um erro ao gravar o jogo";
             }
+        }
+
+        private Jogo ObterModeloPrenchido()
+        {
+            var jogo = new Jogo();
+
+            jogo.Titulo = txtTitulo.Text;
+            jogo.ValorPago = string.IsNullOrWhiteSpace(txtValorPago.Text) ? (double?)null : Convert.ToDouble(txtValorPago.Text);
+            jogo.DataCompra = string.IsNullOrWhiteSpace(txtDataCompra.Text) ? (DateTime?)null : Convert.ToDateTime(txtDataCompra.Text);
+            jogo.IdEditor = Convert.ToInt32(DdlEditor.SelectedValue);
+            jogo.IdGenero = Convert.ToInt32(DdlGenero.SelectedValue);
             
+
+            return jogo;
+
         }
 
         private string GravarImagemNoDisco()
@@ -100,6 +138,43 @@ namespace BibliotecaJogos.Site.Jogos
 
             DdlGenero.DataSource = generos;
             DdlGenero.DataBind();
+        }
+
+        private void CarregarDadosParaEdicao()
+        {
+            _jogosBo = new JogosBo();
+
+            var id = ObterIdDoJogo();
+
+            var jogo = _jogosBo.ObterJogoPeloId(id);
+
+            txtTitulo.Text = jogo.Titulo;
+            txtValorPago.Text = jogo.ValorPago.ToString();
+            txtDataCompra.Text = jogo.DataCompra.HasValue ? jogo.DataCompra.Value.ToString("yyyy-MM-dd") : string.Empty;
+            DdlEditor.SelectedValue = jogo.IdEditor.ToString();
+            DdlGenero.SelectedValue = jogo.IdGenero.ToString();
+        }
+
+        public int ObterIdDoJogo() 
+        {
+            var id = 0;
+            var idQueryString = Request.QueryString["id"];
+            if (int.TryParse(idQueryString, out id))
+            {
+                if(id <= 0)
+                {
+                    throw new Exception("Id inválido");
+                }
+                return id;
+            }
+            else
+            {
+                throw new Exception("Id inválido");
+            }
+        }
+        public bool EstaEmModoEdicao()
+        {
+            return Request.QueryString.AllKeys.Contains("id");
         }
     }
 }

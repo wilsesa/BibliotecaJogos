@@ -85,6 +85,7 @@
     <Content Include="Content\ImagensJogos\GTAV-V.jpg" />
     <Content Include="Content\ImagensJogos\JustDance2020.jpg" />
     <Content Include="Content\Jogos\catalogo.css" />
+    <Content Include="Content\Jogos\index.css" />
     <Content Include="Global.asax" />
     <Content Include="Jogos\CadastroEdicaoJogos.aspx" />
     <Content Include="Jogos\Catalogo.aspx" />
